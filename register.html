@@ -36,17 +36,15 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
-                               
+                            <form class="user" id="form-id">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="FirstName"
-                                    placeholder="First Name">
+                                        placeholder="First Name">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="LastName"
-                                    placeholder="LastName">
+                                        placeholder="LastName">
                                 </div>
-                                
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="UserName"
                                         placeholder="Username">
@@ -61,17 +59,18 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="InputPassword"
+                                            placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                            id="RepeatPassword" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <!-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                                     Register Account
-                                </a>
+                                </a> -->
+                                <button class="btn btn-primary btn-user btn-block">Register Account</button>
                             </form>
                             <hr>
                             <div class="text-center">
@@ -97,6 +96,41 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        /*
+        document.querySelector("#form-id").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var username = document.querySelector("#UserName").value;
+            var password = document.querySelector("#InputPassword").value;
+            console.log("Username: " + username);
+            console.log("Password: " + password);
+        });*/
+
+        // document.querySelector("#form-id").addEventListener("submit", function (event) {
+        //     event.preventDefault();
+        //     var formData = new FormData(event.target);
+        //     var jsonData = JSON.stringify(Object.fromEntries(formData));
+        //     console.log(jsonData);
+        // });
+
+        document.getElementById("form-id").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var formData = {
+                FirstName: document.getElementById("FirstName").value,
+                LastName: document.getElementById("LastName").value,
+                UserName: document.getElementById("UserName").value,
+                InputEmail: document.getElementById("InputEmail").value,
+                PhoneNumber: document.getElementById("PhoneNumber").value,
+                InputPassword: document.getElementById("InputPassword").value,
+                RepeatPassword: document.getElementById("RepeatPassword").value
+            };
+            console.log(formData);
+        });
+
+
+
+    </script>
 
 </body>
 
