@@ -84,7 +84,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link text-white " href="../admin/notifications.html">
+          <a class="nav-link text-white " href="../admin/notify-users.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">notifications</i>
             </div>
@@ -108,7 +108,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../admin/notifications.html">
+          <a class="nav-link text-white " href="../admin/mails.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">mails</i>
             </div>
@@ -137,6 +137,7 @@
           
           <ul class="navbar-nav  justify-content-end">
             
+            
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -151,40 +152,33 @@
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
-          
+            
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <div class="row min-vh-20">
-        <div class="col-12 mx-auto">
-          <div class="card my-4">
-            <table class="table">
-              <thead>
-                <tr>
-                  
-                  <th>Task Description</th>
-                  <th>Due Date</th>
-                  <th>Amount</th>
-                
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                 
-                  <td>Task 1 Description</td>
-                  <td>01/01/2022</td>
-                  <td>$100</td>
-                  <td><button class="btn btn-danger">Delete</button></td>
-                  <td><button class="btn btn-warning">Edit</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-         
-        </div>
+      <div class="row min-vh-80">
+        <form id="notification-form">
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <input type="text" class="form-control" id="message">
+            </div>
+            <div class="form-group">
+              <label for="link">Link:</label>
+              <input type="text" class="form-control" id="link">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="activeOnly">
+              <label class="form-check-label" for="activeOnly">Active Only</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Notification</button>
+          </form>
+          
+          
       </div>
       <footer class="footer py-4  ">
         <div class="container-fluid">
@@ -217,6 +211,24 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <script>document.getElementById("notification-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var message = document.getElementById("message").value;
+    var link = document.getElementById("link").value;
+    var activeOnly = document.getElementById("activeOnly").checked;
+    
+    if (activeOnly) {
+        var notification = `<div class="alert alert-info" role="alert">
+        <strong>Message:</strong> ${message} <br>
+        <strong>Link:</strong> <a href="${link}">${link}</a>
+        </div>`;
+        document.getElementById("notification-div").innerHTML = notification;
+    } else {
+        alert("Notification not posted as Active Only option is not selected");
+    }
+});
+</script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example admin etc -->
