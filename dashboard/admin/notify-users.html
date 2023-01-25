@@ -59,7 +59,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="../admin/add-task.html">
+          <a class="nav-link text-white" href="../admin/add-task.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -84,7 +84,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link text-white " href="../admin/notify-users.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="../admin/notify-users.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">notifications</i>
             </div>
@@ -92,7 +92,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../admin/notifications.html">
+          <a class="nav-link text-white " href="../admin/T_Confirm URL.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">notifications</i>
             </div>
@@ -100,7 +100,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../admin/notifications.html">
+          <a class="nav-link text-white " href="../admin/T__Confirm callback.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">notifications</i>
             </div>
@@ -113,6 +113,14 @@
               <i class="material-icons opacity-10">mails</i>
             </div>
             <span class="nav-link-text ms-1">Mails</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../admin/profile.html">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">person</i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
           </a>
         </li>
         
@@ -162,7 +170,8 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row min-vh-80">
-        <form id="notification-form">
+          <div class="card-body">
+            <form id="notification-form">
             <div class="form-group">
               <label for="message">Message:</label>
               <input type="text" class="form-control" id="message">
@@ -176,8 +185,28 @@
               <label class="form-check-label" for="activeOnly">Active Only</label>
             </div>
             <button type="submit" class="btn btn-primary">Post Notification</button>
-          </form>
+            </form>
+          </div>
           
+          <div class="card">
+            <div class="card-header">
+              <h3>Notifications</h3>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="notification">
+                  <input type="checkbox" class="notification-checkbox" id="notification-1">
+                  <label for="notification-1">Notification 1</label>
+                </div>
+                <div class="notification">
+                  <input type="checkbox" class="notification-checkbox" id="notification-2">
+                  <label for="notification-2">Notification 2</label>
+                </div>
+                <button type="submit" class="btn btn-danger delete-btn">Delete Selected</button>
+              </form>
+            </div>
+          </div>
+        
           
       </div>
       <footer class="footer py-4  ">
