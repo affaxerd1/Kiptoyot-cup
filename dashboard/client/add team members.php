@@ -21,6 +21,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="clienttyle" href="../assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+  <link id="" href="../assets/css/style.css?v=3.0.4" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -36,7 +37,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/dashboard.html">
+          <a class="nav-link text-white " href="../client/dashboard.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -44,45 +45,24 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/posted-task.html">
+          <a class="nav-link text-white " href="../client/your team.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Posted Tasks</span>
+            <span class="nav-link-text ms-1">Your team</span>
           </a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/awarded-task.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Awarded Task</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="../client/submit-task.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="../client/add team members.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
-            <span class="nav-link-text ms-1">Submit Task</span>
+            <span class="nav-link-text ms-1">Add Team Members</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../client/withdraw-money.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-            </div>
-            <span class="nav-link-text ms-1">Withdraw Money</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../client/withdraw-history.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
-            </div>
-            <span class="nav-link-text ms-1">Witdrawal History</span>
-          </a>
-        </li>
+        
+        
         
         <li class="nav-item">
           <a class="nav-link text-white " href="../client/profile.html">
@@ -138,38 +118,44 @@
       </div>
     </nav>
     <!-- End Navbar -->
+
+    <div class="notification" id="notification"> </div>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-10 mx-auto">
           <div class="card mt-6">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">SUBMIT COMPLETED TASK</h6>
+                <h6 class="text-white text-capitalize ps-3">SUBMIT PLAYER NAMES</h6>
               
               </div>
             </div>
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="submit_players.php" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
               <div class="form-group">
-                <label for="task_name" class="col-sm-2 control-label">Task Name</label>
+                <label for="task_name" class="col-sm-2 control-label">Full Names</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="task_name" placeholder="Task Name">
+                  <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name">
+                  <div id="full_name_error" class="error-message"></div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="task_description" class="col-sm-2 control-label">Task Description</label>
+                <label for="task_name" class="col-sm-2 control-label">ID Number </label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" id="task_description" placeholder="Task Description"></textarea>
+                  <input type="text" class="form-control" name="id_no" id="id_no" placeholder="Id no">
+                  <div id="id_no_error" class="error-message"></div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="task_file" class="col-sm-2 control-label">Upload Task File</label>
+                <label for="task_file" class="col-sm-2 control-label">Upload Photo Image</label>
                 <div class="col-sm-10">
-                  <input type="file" class="form-control-file" id="task_file" placeholder="Upload Task File">
+                  <input type="file" class="form-control-file" name="photo" id="photo" placeholder="Upload Task File">
+                  <div id="photo_error" class="error-message"></div>
+                  <p>*photo should be passport size</p>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10 mt-3">
-                  <button type="submit" class="btn btn-primary">Submit Task</button>
+                  <button type="submit" class="btn btn-primary">Submit Details</button>
                 </div>
               </div>
             </form>
@@ -183,7 +169,7 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">SUBMITTED TASK</h6>
-                <p class="text-xs text-secondary mb-0 text-white"> For quick review of your asignments, avoid submitting them close to midnight.Recommended submission is 4AM-9PM.Attach your username and phone number alongside when requesting for our customer support/help</p>
+                <p class="text-xs text-secondary mb-0 text-white">A maximum of 18 playes can be register</p>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -191,20 +177,20 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Task Name</th>
-                      <th>Task Description</th>
-                      <th>Date Submitted</th>
-                      <th>Review Date</th>
+                      <th>Field</th>
+                      <th>Context</th>
+                      <th>Due Date</th>
+                      <th>Amount</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Task 1</td>
-                      <td>Task 1 Description</td>
+                      <td>Field</td>
+                      <td>Context</td>
                       <td>01/01/2022</td>
-                      <td>01/02/2022</td>
-                      <td><button class="btn btn-danger">Cancel</button></td>
+                      <td>$100</td>
+                      <td><button class="btn btn-danger">Cancel Bid</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -235,6 +221,7 @@
   
   </div>
   <!--   Core JS Files   -->
+  <script src="../assets/js/add_team_members.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

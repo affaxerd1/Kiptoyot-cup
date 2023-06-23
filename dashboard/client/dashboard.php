@@ -19,47 +19,78 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="clienttyle" href="../assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
-  <link id="" href="../assets/css/style.css?v=3.0.4" rel="stylesheet" />
-</head>
+  <link id="" href="../assets/css/style.css" rel="stylesheet" />
 
-<?php
-include_once "db_connect.php";
+  <?php
+  error_reporting(0);
+// Initialize error variables
+$team_name_error = $selectedconstituencyerror= $selectedwarderror = '';
 
+// Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Get the submitted values
+    $team_name = $_POST['team_name'];
+    $selectedconstituency = $_POST['constituency'];
+    $selectedward = $_POST['ward'];
 
+    // Validate if the values are empty
+    if (empty($team_name)) {
+        $team_name_error = "Please enter a name";
+    } else {
+        // Establish a database connection (replace 'hostname', 'username', 'password', and 'database' with your actual database credentials)
+        $conn = new mysqli('localhost', 'root', '', 'kiptoyot');
 
-    $team_name=$_POST['team_name'];
-    $selected_constituency = $_POST['constituency'];
-    $selected_ward = $_POST['ward'];
+        // Check for any connection errors
+        if ($conn->connect_error) {
+            die('Connection failed: ' . $conn->connect_error);
+        }
 
-    if (empty($team_name || $selected_constituency || $selected_ward)) {
-        $error = "Please select an option.";
-    }
-
-        // Prepare and execute an SQL INSERT statement
-        $stmt = $conn->prepare("INSERT INTO teams (name, constituency, ward) VALUES (?,?,?)");
-        $stmt->bind_param("sss",$team_name, $selected_constituency,  $selected_ward);
+        // Prepare and execute an SQL SELECT statement to check if the team name already exists
+        $stmt = $conn->prepare("SELECT * FROM teams WHERE name = ?");
+        $stmt->bind_param("s", $team_name);
         $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Check if the insert was successful
-        if ($stmt->affected_rows > 0) {
-            echo "Value inserted successfully!";
+        // If the team name already exists, display an error message
+        if ($result->num_rows > 0) {
+            $team_name_error = "Team name already exists";
+            $errorMessage="Team already exists. Log in and confirm your squad ";
         } else {
-            echo "Error inserting value: " . $stmt->error;
+            // Validate the other fields
+            if (empty($selectedconstituency)) {
+                $selectedconstituencyerror = "Please select one";
+            }
+
+            if (empty($selectedward)) {
+                $selectedwarderror = "Please select one";
+            }
+            // If there are no errors, proceed with database insertion
+            if (empty($team_name_error) && empty($selectedconstituencyerror) && empty($selectedwarderror)) {
+                // Prepare and execute an SQL INSERT statement
+                $stmt = $conn->prepare("INSERT INTO teams (name, constituency, ward) VALUES (?, ?, ?)");
+                $stmt->bind_param("sss", $team_name, $selectedconstituency, $selectedward);
+                $stmt->execute();
+
+                // Check if the insert was successful
+                if ($stmt->affected_rows > 0) {
+                    $successMessage = "Team registered successfully. Good luck!";
+                } else {
+                    $errorMessage = "Error inserting values: " . $stmt->error;
+                }
+            }
         }
 
         // Close the statement and database connection
         $stmt->close();
         $conn->close();
-
-
     }
-
-    else{
-        echo "error";
-    }
+}
 
 ?>
+</head>
+
+
+
 
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
@@ -72,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="../client/dashboard.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="../client/dashboard.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -80,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/your team.html">
+          <a class="nav-link text-white " href="../client/your_team.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -88,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/add team members.html">
+          <a class="nav-link text-white " href="../client/add_team_members.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
@@ -99,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/profile.html">
+          <a class="nav-link text-white " href="../client/profile.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -107,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../client/sign-in.html">
+          <a class="nav-link text-white " href="../client/sign-in.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">logout</i>
             </div>
@@ -150,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       
-      
+    <div id="notification" style="display: none;">Values inserted successfully</div>
       <div class="crow mt-4 ">
           <div class="card h-100">
             <div class="card-body p-3">
@@ -200,9 +231,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                   <div class="timeline-content">
                   <h6 class="text-dark text-sm font-weight-bold mb-0">Register your team</h6>
                   <br>
-                  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                  <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                   <label class="home-label"> Team Name:</label>
-                  <input type="text" class="input" name="team_name">
+                  <input type="text" class="input" name="team_name" >
+                  <span class="error"><?php echo $team_name_error; ?></span>
                   <br>
             
                   <script>
@@ -286,14 +318,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <option class="option" value="Kipkelion-West">Kipkelion-West</option>
                     <option class="option" value="Soin-Sigowet">Soin-Sigowet</option>
                 </select>
+                <span class="error"><?php echo $selectedconstituencyerror; ?> <br></span> 
             
                 <label for="ward" class="home-label">Ward:</label>
                 <select id="ward-options" class="select-field" name="ward"></select>
+                <span class="error"><?php echo $selectedwarderror; ?></span>
                     
                   <div>
                   <button class="btn btn-primary reg" type="submit">Register</button>
                 </div>
-                <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+                
 
             </form>
                     
@@ -363,3 +397,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const notificationElement = document.getElementById('notification');
+
+      <?php if (isset($successMessage)) : ?>
+        showNotification('<?php echo $successMessage; ?>', 'success');
+      <?php endif; ?>
+
+      <?php if (isset($errorMessage)) : ?>
+        showNotification('<?php echo $errorMessage; ?>', 'error');
+      <?php endif; ?>
+
+      function showNotification(message, type) {
+        notificationElement.textContent = message;
+        notificationElement.classList.add(type);
+        notificationElement.style.display = 'block';
+
+        setTimeout(() => {
+          hideNotification();
+        }, 3000);
+      }
+
+      function hideNotification() {
+        notificationElement.style.display = 'none';
+        notificationElement.classList.remove('success', 'error');
+        notificationElement.textContent = '';
+      }
+    });
+  </script>

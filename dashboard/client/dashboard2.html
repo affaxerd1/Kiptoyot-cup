@@ -19,47 +19,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="clienttyle" href="../assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
-  <link id="" href="../assets/css/style.css?v=3.0.4" rel="stylesheet" />
 </head>
-
-<?php
-include_once "db_connect.php";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-
-    $team_name=$_POST['team_name'];
-    $selected_constituency = $_POST['constituency'];
-    $selected_ward = $_POST['ward'];
-
-    if (empty($team_name || $selected_constituency || $selected_ward)) {
-        $error = "Please select an option.";
-    }
-
-        // Prepare and execute an SQL INSERT statement
-        $stmt = $conn->prepare("INSERT INTO teams (name, constituency, ward) VALUES (?,?,?)");
-        $stmt->bind_param("sss",$team_name, $selected_constituency,  $selected_ward);
-        $stmt->execute();
-
-        // Check if the insert was successful
-        if ($stmt->affected_rows > 0) {
-            echo "Value inserted successfully!";
-        } else {
-            echo "Error inserting value: " . $stmt->error;
-        }
-
-        // Close the statement and database connection
-        $stmt->close();
-        $conn->close();
-
-
-    }
-
-    else{
-        echo "error";
-    }
-
-?>
 
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
@@ -200,102 +160,50 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                   <div class="timeline-content">
                   <h6 class="text-dark text-sm font-weight-bold mb-0">Register your team</h6>
                   <br>
-                  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                  <label class="home-label"> Team Name:</label>
-                  <input type="text" class="input" name="team_name">
+                  <form action=" submit_team.php">
+                  <label> Team Name</label>
+                  <input type="text">
                   <br>
             
-                  <script>
-                    function selectOption() {
-                        var constituencySelect = document.getElementById("constituency");
-                        var wardSelect = document.getElementById("ward-options");
-            
-                        // Clear previous options
-                        wardSelect.innerHTML = "";
-            
-                        // Get the selected option value
-                        var selectedOption = constituencySelect.value;
-            
-                        // Create the specific options based on the selected option
-                        if (selectedOption === "Ainamoi") {
-                            addOption(wardSelect, "Ainamoi", "Ainamoi");
-                                addOption(wardSelect, "Kapsoit", "Kapsoit");
-                                addOption(wardSelect, "Kapchebor", "Kapchebor");
-                                addOption(wardSelect, "Kapkugerwet", "Kapkugerwet");
-                                addOption(wardSelect, "Kipchimchim", "Kipchimchim");
-                                addOption(wardSelect, "Kapsaos", "Kapsaos");
-                        }
-                                else if (selectedOption === "Kipkelion-East") {
-                            addOption(wardSelect, "Kedowa/Kimugul", "Kedowa/Kimugul");
-                            addOption(wardSelect, "Chepseon", "Chepseon");
-                            addOption(wardSelect, "Londiani", "Londiani");
-                            addOption(wardSelect, "Tendeno/Sorget", "Tendeno/Sorget") 
-                        } 
-                        else if (selectedOption === "Belgut") {
-                            addOption(wardSelect, "Chaik", "Chaik");
-                            addOption(wardSelect, "Chemamul", "Chemamul");
-                            addOption(wardSelect, "Kabianga", "Kabianga");
-                            addOption(wardSelect, "Kaplelatet", "Kaplelatet");
-                            addOption(wardSelect, "Kebeneti", "Kebeneti");
-                            addOption(wardSelect, "Kapkoiyan", "Kapkoiyan");
-                            addOption(wardSelect, "Kiptere", "Kiptere");
-                            addOption(wardSelect, "Seretut/Cheptororiet", "seretut/Cheptororiet");
-                            addOption(wardSelect, "Waldai", "Waldai");
-                        } 
-                        else if (selectedOption === "Bureti") {
-                            addOption(wardSelect, "Cheborge", "cheborge");
-                            addOption(wardSelect, "Cheplanget", "cheplanget");
-                            addOption(wardSelect, "chemosot", "chomosot");
-                            addOption(wardSelect, "kapkatet", "kapkatet");
-                            addOption(wardSelect, "Kusumek", "kusumek");
-                            addOption(wardSelect, "Litein", "litein");
-                            addOption(wardSelect, "Kibugat", "kibugat");
-                            addOption(wardSelect, "Kisiara", "kisiara");
-                            addOption(wardSelect, "Tebesonik", "tebesonik");
-                        } 
-                       
-                        else if (selectedOption === "Kipkelion-West") {
-                            addOption(wardSelect, "Kipkelion", "kipkelion");
-                            addOption(wardSelect, "kunyak", "kunyak");
-                            addOption(wardSelect, "Kimasian", "kimasian");
-                            addOption(wardSelect, "Chilchila", "chilchila");
+                  <label for="Constituency">Constituency</label>
+                  <select id="constituency" name="constituency"  onchange="constituencyChange() ">
+                    <option value="Ainamoi">Ainamoi</option>
+                    <option value="Belgut">Belgut</option>
+                    <option value="Bureti">Bureti</option>
+                    <option value="Kipkelion East">Kipkelion East</option>
+                    <option value="Kipkelion West">Kipkelion West</option>
+                    <option value="Soin-Sigowet">Soin-Sigowet</option>
+                  </select>
                   
-                        } else {
-                            addOption(wardSelect, "Sigowet", "sigowet");
-                                addOption(wardSelect, "Soliat", "soliat");
-                                addOption(wardSelect, "Soin", "soin");
                   
-                        }
-                    }
-            
-                    function addOption(selectElement, optionText, optionValue) {
-                        var option = document.createElement("option");
-                        option.text = optionText;
-                        option.value = optionValue;
-                        selectElement.add(option);
-                    }
-                </script>            
-                <label class="home-label" for="Constituency">Constituency:</label>
-                <select class="select-field" id="constituency" name="constituency" onchange="selectOption()">
-                    <option selected disabled class="disabled" value="">constituency</option>
-                    <option class="option" value="Ainamoi">Ainamoi</option>
-                    <option class="option" value="Kipkelion-East">Kipkelion-East</option>
-                    <option class="option" value="Belgut">Belgut</option>
-                    <option class="option" value="Bureti">Bureti</option>
-                    
-                    <option class="option" value="Kipkelion-West">Kipkelion-West</option>
-                    <option class="option" value="Soin-Sigowet">Soin-Sigowet</option>
-                </select>
-            
-                <label for="ward" class="home-label">Ward:</label>
-                <select id="ward-options" class="select-field" name="ward"></select>
-                    
-                  <div>
-                  <button class="btn btn-primary reg" type="submit">Register</button>
-                </div>
-                <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+                  <label for="ward">Ward</label>
+                  <select id="ward-options" class="dropdown"> costitueny</select>
 
-            </form>
+                  <script type="text/javascript">
+                    function constituencyChange() {
+                      var constituency = document.getElementById("constituency").value;
+                      if (constituency == "Ainamoi") {
+                        var html = '<option value="Kitutu">Kitutu</option>';  
+                        document.getElementById("ward-options").innerHTML = html;
+                      }
+                      else if (constituency == "Belgut") {
+                        var html = '<option value="Miotoni">Miotoni</option><option value="Chebukwet">Chebukwet</option>';
+                        document.getElementById("ward-options").innerHTML = html;
+                      }
+                      else if (constituency == "Bureti") {
+                        var html = '<option value="Cheplanget">Cheplanget</option><option value="Kapkatet">Kapkatet</option>';
+                        document.getElementById("ward-options").innerHTML = html;
+                      }
+                      else if (constituency == "Kipkelion East") {
+                        var html
+                      }
+
+                    </script>
+                  <div>
+                  <button type="submit">Submit</button>
+                </div>
+
+                </form>
                     
                 </div>
 
@@ -315,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </span>
                 <div class="timeline-content">
                   <h6 class="text-dark text-sm font-weight-bold mb-0">Announcements</h6>
-                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Welcome to the Kiptoyot Cup. May the best team win!</p>
+                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">info@smartechwriters.com</p>
                 </div>
               </div>
               <div class="timeline-block mb-3">
@@ -324,7 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </span>
                 <div class="timeline-content">
                   <h6 class="text-dark text-sm font-weight-bold mb-0">Updates</h6>
-                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0" data-color="red"></p>
+                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0" data-color="red">You need to activate your account to access.</p>
                 </div>
              </div>
             </div>
@@ -338,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 <div class="copyright">
-                  &copy; Copyright <script>document.write(new Date().getFullYear())</script> <strong>Kiptoyot Cup</strong>. All Rights Reserved
+                  &copy; Copyright <script>document.write(new Date().getFullYear())</script> <strong>Smartechwriters</strong>. All Rights Reserved
                 </div>
               </div>
             </div>

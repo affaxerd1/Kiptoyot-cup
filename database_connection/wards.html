@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dropdown Menu Example</title>
+    <script>
+        function selectOption() {
+            var constituencySelect = document.getElementById("constituency");
+            var wardSelect = document.getElementById("ward-options");
+
+            // Clear previous options
+            wardSelect.innerHTML = "";
+
+            // Get the selected option value
+            var selectedOption = constituencySelect.value;
+
+            // Create the specific options based on the selected option
+            if (selectedOption === "Ainamoi") {
+                addOption(wardSelect, "Ainamoi", "ward1");
+                    addOption(wardSelect, "Kapsoit", "ward2");
+                    addOption(wardSelect, "Kapchebor", "ward3");
+                    addOption(wardSelect, "Kapkugerwet", "ward4");
+                    addOption(wardSelect, "Kipchimchim", "ward5");
+                    addOption(wardSelect, "Kapsaos", "ward6");
+            } else if (selectedOption === "Belgut") {
+                addOption(wardSelect, "Chaik", "wardE");
+                addOption(wardSelect, "Chemamul", "wardF");
+                addOption(wardSelect, "Kabianga", "wardG");
+                addOption(wardSelect, "Kaplelatet", "wardI");
+                addOption(wardSelect, "Kebeneti", "wardJ");
+                addOption(wardSelect, "Kapkoiyan", "wardK");
+                addOption(wardSelect, "Kiptere", "wardL");
+                addOption(wardSelect, "Seretut/Cheptororiet", "wardM");
+                addOption(wardSelect, "Waldai", "wardN");
+            } 
+            else if (selectedOption === "Bureti") {
+                addOption(wardSelect, "Cheborge", "ward6");
+                addOption(wardSelect, "Cheplanget", "ward7");
+                addOption(wardSelect, "chemosot", "ward8");
+                addOption(wardSelect, "kapkatet", "ward9");
+                addOption(wardSelect, "Kusumek", "ward10");
+                addOption(wardSelect, "Litein", "ward11");
+                addOption(wardSelect, "Kibugat", "ward12");
+                addOption(wardSelect, "Kisiara", "ward13");
+                addOption(wardSelect, "Tebesonik", "ward14");
+            } 
+            else if (selectedOption === "kipkelion East") {
+                addOption(wardSelect, "Kedowa/Kimugul", "ward15");
+                addOption(wardSelect, "Chepseon", "ward16");
+                addOption(wardSelect, "Londiani", "ward17");
+                addOption(wardSelect, "Tendeno/Sorget", "ward17");
+            } 
+            else if (selectedOption === "Kipkelion west") {
+                addOption(wardSelect, "Kipkelion", "ward20");
+                addOption(wardSelect, "kunyak", "ward21");
+                addOption(wardSelect, "Kimasian", "ward22");
+                addOption(wardSelect, "Chilchila", "ward23");
+      
+            } else {
+                addOption(wardSelect, "Ward A", "wardA");
+                addOption(wardSelect, "Ward B", "wardB");
+                addOption(wardSelect, "Ward C", "wardC");
+            }
+        }
+
+        function addOption(selectElement, optionText, optionValue) {
+            var option = document.createElement("option");
+            option.text = optionText;
+            option.value = optionValue;
+            selectElement.add(option);
+        }
+    </script>
+</head>
+<body>
+    <h2>Dropdown Menu Example</h2>
+
+    <label for="Constituency">Constituency</label>
+    <select id="constituency" name="constituency" onchange="selectOption()">
+        <option value="Ainamoi">Ainamoi</option>
+        <option value="Belgut">Belgut</option>
+        <option value="Bureti">Bureti</option>
+        <option value="Kipkelion East">Kipkelion East</option>
+        <option value="Kipkelion West">Kipkelion West</option>
+        <option value="Soin-Sigowet">Soin-Sigowet</option>
+    </select>
+
+    <label for="ward">Ward</label>
+    <select id="ward-options"></select>
+</body>
+</html>

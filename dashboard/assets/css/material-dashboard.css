@@ -81,6 +81,7 @@
   }
 }
 
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -22095,7 +22096,8 @@ body.dark-version {
   border-radius: 0 !important;
 }
 
-.input-group.input-group-dynamic .form-control:focus,
+.input-group.input-group-dynamic 
+:focus,
 .input-group.input-group-static .form-control:focus {
   background-size: 100% 100%, 100% 100%;
 }
@@ -27701,4 +27703,9 @@ pre[class*="language-"] {
   }
 }
 
+.form-horizontal {
+  padding-left: 20px;
+}
+
 /*# sourceMappingURL=dashboard-free.css.map */
+

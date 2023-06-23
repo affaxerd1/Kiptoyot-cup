@@ -1,0 +1,139 @@
+.form-horizontal {
+    padding-top: 20px;
+    padding-left: 50px;
+}
+
+.input {
+    border: none;
+    border-bottom: 1px solid grey;
+    background-color: transparent ;
+    color: black;
+    font: "Roboto", Helvetica, Arial, sans-serif;
+    
+    
+}
+
+.input:focus {
+    outline: none;
+}
+
+.home-label {
+    font-weight: bold;
+    padding-bottom: 10px;
+    
+}
+
+.select-field {
+    border: none;
+    border-bottom: 1px solid grey;
+    background-color: transparent;
+
+}
+
+.select-field:focus {
+    outline: none;
+}
+
+
+.select-field .disabled {
+    color: grey;
+}
+
+.reg {
+    align-items: center;
+}
+
+.error {
+    color: red;
+}
+/* for pop up notification */
+    .notification {
+      display: none;
+      background-color: #f2f2f2;
+      color: #333;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-left: 6px solid #6c757d;
+    }
+
+    .notification.success {
+      border-color: #28a745;
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .notification.error {
+      border-color: #dc3545;
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+
+    /* For add team members page*/
+
+.form-group .form-control {
+    padding-left: 10px;
+}
+
+.error-message {
+    color: red;
+  }
+
+  .error-field {
+    border: 1px solid red;
+  }
+
+
+  /*notification*/
+
+  .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: #42b983;
+      color: #fff;
+      border-radius: 5px;
+      display: none;
+  }
+
+
+      /*submitted players table*/
+
+       .table{
+        padding-left: 30px;
+       }
+      
+      .table-container {
+        overflow-x: auto;
+      }
+      
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+       
+      }
+      
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      .btn {
+        padding: 5px 10px;
+      }
+      
+      /* Apply responsive styling using media queries */
+      @media (max-width: 600px) {
+        th, td {
+          font-size: 12px;
+          padding: 5px;
+        }
+        
+        .btn {
+          padding: 3px 6px;
+          font-size: 10px;
+        }
+      }
+      
