@@ -137,3 +137,22 @@
         }
       }
       
+      /*images in table*/
+
+      .table tbody tr td img{
+
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px #28a745;
+        box-shadow: 0 2px 6px #0003;
+        
+      }
+
+      /*headers*/
+
+      .ps-3 {
+        text-align: center;
+      }

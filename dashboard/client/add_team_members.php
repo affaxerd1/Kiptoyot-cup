@@ -173,7 +173,7 @@ include_once 'db_connect.php';
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Submitted players</h6>
+                <h6 class="text-white text-capitalize ps-3">SUBMITTED PLAYERS</h6>
               </div>
             </div>
             <table class="table">
@@ -202,9 +202,15 @@ include_once 'db_connect.php';
                   <td><?php echo $q['fullname']?> </td>
                   <td><?php echo $q['id']?></td>
                   <td><?php echo $q['id']?></td>
-                  <td><?php echo $q['photo']?></td>
+                  <td><img class="img" src="https://img.chelseafc.com/image/upload/f_auto,h_860,q_50/editorial/people/first-team/2022-23/Reece_James_profile_avatar_final_22-23.png" alt="<?php  echo $q['fullname'] ?>"></td>
                   <td><button class="btn btn-success">Edit</button></td>
-                  <td><button class="btn btn-danger">Delete</button></td>
+                  <td><div id="delete">
+                                <form action="delete.php" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $q['id']?>">
+                                    <input type="submit" name="cancel" id="bt2" class="btn btn-danger"  value="DELETE"></input>
+                                </form>
+    
+                        </div></td>
 
                   <?php }?>
                  
