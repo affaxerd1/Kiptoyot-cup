@@ -271,31 +271,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             addOption(wardSelect, "Kebeneti", "Kebeneti");
                             addOption(wardSelect, "Kapkoiyan", "Kapkoiyan");
                             addOption(wardSelect, "Kiptere", "Kiptere");
-                            addOption(wardSelect, "Seretut/Cheptororiet", "seretut/Cheptororiet");
+                            addOption(wardSelect, "Seretut/Cheptororiet", "Seretut/Cheptororiet");
                             addOption(wardSelect, "Waldai", "Waldai");
                         } 
                         else if (selectedOption === "Bureti") {
-                            addOption(wardSelect, "Cheborge", "cheborge");
-                            addOption(wardSelect, "Cheplanget", "cheplanget");
-                            addOption(wardSelect, "chemosot", "chomosot");
-                            addOption(wardSelect, "kapkatet", "kapkatet");
-                            addOption(wardSelect, "Kusumek", "kusumek");
-                            addOption(wardSelect, "Litein", "litein");
-                            addOption(wardSelect, "Kibugat", "kibugat");
-                            addOption(wardSelect, "Kisiara", "kisiara");
-                            addOption(wardSelect, "Tebesonik", "tebesonik");
+                            addOption(wardSelect, "Cheborge", "Cheborge");
+                            addOption(wardSelect, "Cheplanget", "Cheplanget");
+                            addOption(wardSelect, "chemosot", "Chomosot");
+                            addOption(wardSelect, "kapkatet", "Kapkatet");
+                            addOption(wardSelect, "Kusumek", "Kusumek");
+                            addOption(wardSelect, "Litein", "Litein");
+                            addOption(wardSelect, "Kibugat", "Kibugat");
+                            addOption(wardSelect, "Kisiara", "Kisiara");
+                            addOption(wardSelect, "Tebesonik", "Tebesonik");
                         } 
                        
                         else if (selectedOption === "Kipkelion-West") {
-                            addOption(wardSelect, "Kipkelion", "kipkelion");
-                            addOption(wardSelect, "kunyak", "kunyak");
-                            addOption(wardSelect, "Kimasian", "kimasian");
-                            addOption(wardSelect, "Chilchila", "chilchila");
+                            addOption(wardSelect, "Kipkelion", "Kipkelion");
+                            addOption(wardSelect, "Kunyak", "Kunyak");
+                            addOption(wardSelect, "Kimasian", "Kimasian");
+                            addOption(wardSelect, "Chilchila", "Chilchila");
                   
                         } else {
-                            addOption(wardSelect, "Sigowet", "sigowet");
-                                addOption(wardSelect, "Soliat", "soliat");
-                                addOption(wardSelect, "Soin", "soin");
+                            addOption(wardSelect, "Sigowet", "Sigowet");
+                                addOption(wardSelect, "Soliat", "Soliat");
+                                addOption(wardSelect, "Soin", "Soin");
                   
                         }
                     }
